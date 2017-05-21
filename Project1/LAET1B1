@@ -1,0 +1,151 @@
+Script started on Fri Sep 25 21:28:04 2015
+[?1034hbash-3.2$ cat P1_B1.cpp
+#include <ctime>
+#include <iostream>
+using namespace std;
+
+/* Shell Sort Version 1
+	Gap 1/2 of array size */
+void shell_sort1(int array[], int size) {
+    int gap = size/2;
+    while (gap > 0) {
+        for (int i = 0; i < size - gap; i++) {
+            int j = i + gap;
+            int tmp = array[j];
+            while (j >= gap && tmp < array[j - gap]) {
+                array[j] = array[j - gap];
+                j -= gap;
+            }
+            array[j] = tmp;
+        }
+        if (gap == 2) {
+            gap = 1;
+        } else {
+            gap /= 2;
+        }
+    }
+}
+
+/* Linear Search */
+int linear_search(int array[], int n, int value){
+  int i = 0;
+  while (i < n && array[i] != value) {
+      i++;
+	}
+  if (i == n){
+    return -1;
+  }
+  else {
+    return i;
+  }
+}
+
+/* Binary Search */
+int binary_search(int array[], int n, int value) {
+  int left=0;
+      while (left <= n) {
+            int middle = (left + n) / 2;
+            if (array[middle] == value)
+                  return middle;
+            else if (array[middle] > value)
+                  n = middle - 1;
+            else
+                  left = middle + 1;
+      }
+      return -1;
+}
+
+
+/* 	Array fill function */
+int fill(int *array, int n){
+  srand(time(NULL));
+  for(int i=0; i<n; i++){
+        array[i] = (rand()%1000000); // limit random numbers to 0 MIN - 1,000,000 MAX
+  }
+  return *array;
+}
+
+/* 	Array print function */
+int print (int *array, int n){
+  for(int row=0; row<n/10; row++){
+    for(int col=0; col<10; col++){
+        printf("%i \t", array[(row*10)+col]);
+      }
+      printf("\n");
+  }
+  return *array;
+}
+
+//Main Function
+int main(){
+  int array[100];
+  int value;                           //array to search
+  int n = sizeof(array)/sizeof(array[0]);   //number of elements in array
+  clock_t t1,t2;                            //clock time to measure execution time
+
+  /* Fill and sort array */
+  fill(array, n);
+  shell_sort1 (array, n);
+  printf("\nSorted array:\n");
+  print(array, n);
+  value = (rand()%1000000);                                //holds search value
+
+  printf("\nSearching for %i using linear search...\n", value);
+  /* perform linear search, measure execution time
+  and report results */
+  t1=clock();
+  if (linear_search(array, n, value) == -1){
+    cout << value << " was NOT found in the array." << endl;
+  }
+  else
+  cout << value << " was found in the array!" << endl;
+  t2=clock();
+
+  float diff = (t2-t1);
+  float seconds = diff / CLOCKS_PER_SEC;
+  printf("\nElapsed linear search time: %.10f seconds.\n", seconds);
+  /* perform binary search, measure execution time
+  and report results */
+  printf("\nSearching for %i using binary search...\n", value);
+  t1=clock();
+  if (binary_search(array, n, value) == -1){
+    cout << value << " was NOT found in the array." << endl;
+  }
+  else
+  cout << value << " was found in the array!" << endl;
+  t2=clock();
+
+  diff = (t2-t1);
+  seconds = diff / CLOCKS_PER_SEC;
+  printf("\nElapsed binary search time: %.10f seconds.\n", seconds);
+
+
+  return 0;
+}
+bash-3.2$ g++ P1_B1.cpp
+bash-3.2$ ./a.out
+
+Sorted array:
+3400 	4008 	17500 	37516 	39977 	54233 	62632 	65234 	66133 	84392 	
+92345 	94114 	95245 	101847 	106395 	107593 	115472 	133593 	145853 	162611 	
+171069 	174662 	188277 	200701 	209254 	214780 	222633 	238151 	253599 	260627 	
+274917 	293612 	299501 	300689 	309613 	314301 	314985 	337469 	342326 	382958 	
+387831 	405081 	417214 	421834 	443544 	449867 	450796 	451987 	456733 	458151 	
+459435 	459773 	468689 	473109 	496506 	498681 	507542 	509246 	513820 	517205 	
+543660 	551116 	563259 	565464 	575625 	594881 	607893 	613404 	616814 	633512 	
+635284 	663111 	664054 	691905 	695249 	717185 	744508 	746537 	776175 	778049 	
+789480 	813507 	817181 	817240 	830130 	839183 	843761 	845431 	854906 	878751 	
+891103 	896656 	904356 	912773 	915851 	930764 	945930 	949538 	984022 	999662 	
+
+Searching for 431931 using linear search...
+431931 was NOT found in the array.
+
+Elapsed linear search time: 0.0000380000 seconds.
+
+Searching for 431931 using binary search...
+431931 was NOT found in the array.
+
+Elapsed binary search time: 0.0000150000 seconds.
+bash-3.2$ exit
+
+Script done on Fri Sep 25 21:28:35 2015

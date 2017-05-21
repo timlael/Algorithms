@@ -1,0 +1,204 @@
+Script started on Fri Oct 23 09:55:29 2015
+[?1034hbash-3.2$ g++ quick*.cpp
+bash-3.2$ ./a.out
+
+Quicksort Right Pivot Sort Time On 100 Elements: 0.0000200000 seconds.
+
+Quicksort Right Pivot Sort Time On 100 Elements: 0.0000270000 seconds.
+
+Quicksort Right Pivot Sort Time On 100 Elements: 0.0000150000 seconds.
+
+Quicksort Right Pivot Sort Time On 100 Elements: 0.0000130000 seconds.
+
+Quicksort Right Pivot Sort Time On 100 Elements: 0.0000130000 seconds.
+
+Quicksort Right Pivot Sort Time On 100 Elements: 0.0000130000 seconds.
+
+Quicksort Right Pivot Sort Time On 100 Elements: 0.0000120000 seconds.
+
+Quicksort Right Pivot Sort Time On 100 Elements: 0.0000120000 seconds.
+
+Quicksort Right Pivot Sort Time On 100 Elements: 0.0000120000 seconds.
+
+Quicksort Right Pivot Sort Time On 100 Elements: 0.0000130000 seconds.
+
+Avg (of 10) Right Pivot Running Time For 100 elements: 0.0000150000 seconds.
+
+Quicksort Median of Three Sort Time On 100 Elements: 0.0000100000 seconds.
+
+Quicksort Median of Three Sort Time On 100 Elements: 0.0000100000 seconds.
+
+Quicksort Median of Three Sort Time On 100 Elements: 0.0000080000 seconds.
+
+Quicksort Median of Three Sort Time On 100 Elements: 0.0000090000 seconds.
+
+Quicksort Median of Three Sort Time On 100 Elements: 0.0000080000 seconds.
+
+Quicksort Median of Three Sort Time On 100 Elements: 0.0000080000 seconds.
+
+Quicksort Median of Three Sort Time On 100 Elements: 0.0000080000 seconds.
+
+Quicksort Median of Three Sort Time On 100 Elements: 0.0000080000 seconds.
+
+Quicksort Median of Three Sort Time On 100 Elements: 0.0000080000 seconds.
+
+Quicksort Median of Three Sort Time On 100 Elements: 0.0000080000 seconds.
+
+Avg (of 10) Median of Three Pivot Running Time For 100 elements: 0.0000085000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 100 Elements: 0.0000200000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 100 Elements: 0.0000190000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 100 Elements: 0.0000210000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 100 Elements: 0.0000190000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 100 Elements: 0.0000210000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 100 Elements: 0.0000190000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 100 Elements: 0.0000190000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 100 Elements: 0.0000200000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 100 Elements: 0.0000190000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 100 Elements: 0.0000220000 seconds.
+
+Avg (of 10) Median of Random 5 Pivot Running Time For 100 elements: 0.0000199000 seconds.
+
+Quicksort Right Pivot Sort Time On 1000 Elements: 0.0001890000 seconds.
+
+Quicksort Right Pivot Sort Time On 1000 Elements: 0.0002460000 seconds.
+
+Quicksort Right Pivot Sort Time On 1000 Elements: 0.0001970000 seconds.
+
+Quicksort Right Pivot Sort Time On 1000 Elements: 0.0001800000 seconds.
+
+Quicksort Right Pivot Sort Time On 1000 Elements: 0.0001930000 seconds.
+
+Quicksort Right Pivot Sort Time On 1000 Elements: 0.0002050000 seconds.
+
+Quicksort Right Pivot Sort Time On 1000 Elements: 0.0001790000 seconds.
+
+Quicksort Right Pivot Sort Time On 1000 Elements: 0.0001890000 seconds.
+
+Quicksort Right Pivot Sort Time On 1000 Elements: 0.0001810000 seconds.
+
+Quicksort Right Pivot Sort Time On 1000 Elements: 0.0002120000 seconds.
+
+Avg (of 10) Right Pivot Running Time For 1000 elements: 0.0001971000 seconds.
+
+Quicksort Median of Three Sort Time On 1000 Elements: 0.0001020000 seconds.
+
+Quicksort Median of Three Sort Time On 1000 Elements: 0.0001010000 seconds.
+
+Quicksort Median of Three Sort Time On 1000 Elements: 0.0001010000 seconds.
+
+Quicksort Median of Three Sort Time On 1000 Elements: 0.0001020000 seconds.
+
+Quicksort Median of Three Sort Time On 1000 Elements: 0.0001030000 seconds.
+
+Quicksort Median of Three Sort Time On 1000 Elements: 0.0001020000 seconds.
+
+Quicksort Median of Three Sort Time On 1000 Elements: 0.0001010000 seconds.
+
+Quicksort Median of Three Sort Time On 1000 Elements: 0.0001010000 seconds.
+
+Quicksort Median of Three Sort Time On 1000 Elements: 0.0001040000 seconds.
+
+Quicksort Median of Three Sort Time On 1000 Elements: 0.0001030000 seconds.
+
+Avg (of 10) Median of Three Pivot Running Time For 1000 elements: 0.0001020000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 1000 Elements: 0.0002460000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 1000 Elements: 0.0002280000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 1000 Elements: 0.0002350000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 1000 Elements: 0.0002370000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 1000 Elements: 0.0002410000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 1000 Elements: 0.0002370000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 1000 Elements: 0.0002400000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 1000 Elements: 0.0002350000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 1000 Elements: 0.0002600000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 1000 Elements: 0.0002310000 seconds.
+
+Avg (of 10) Median of Random 5 Pivot Running Time For 1000 elements: 0.0002390000 seconds.
+
+Quicksort Right Pivot Sort Time On 10000 Elements: 0.0025390000 seconds.
+
+Quicksort Right Pivot Sort Time On 10000 Elements: 0.0026610000 seconds.
+
+Quicksort Right Pivot Sort Time On 10000 Elements: 0.0024659999 seconds.
+
+Quicksort Right Pivot Sort Time On 10000 Elements: 0.0028890001 seconds.
+
+Quicksort Right Pivot Sort Time On 10000 Elements: 0.0026560000 seconds.
+
+Quicksort Right Pivot Sort Time On 10000 Elements: 0.0026199999 seconds.
+
+Quicksort Right Pivot Sort Time On 10000 Elements: 0.0029620000 seconds.
+
+Quicksort Right Pivot Sort Time On 10000 Elements: 0.0027660001 seconds.
+
+Quicksort Right Pivot Sort Time On 10000 Elements: 0.0030840000 seconds.
+
+Quicksort Right Pivot Sort Time On 10000 Elements: 0.0025770001 seconds.
+
+Avg (of 10) Right Pivot Running Time For 10000 elements: 0.0027220000 seconds.
+
+Quicksort Median of Three Sort Time On 10000 Elements: 0.0012740000 seconds.
+
+Quicksort Median of Three Sort Time On 10000 Elements: 0.0013030000 seconds.
+
+Quicksort Median of Three Sort Time On 10000 Elements: 0.0012810000 seconds.
+
+Quicksort Median of Three Sort Time On 10000 Elements: 0.0012690000 seconds.
+
+Quicksort Median of Three Sort Time On 10000 Elements: 0.0012740000 seconds.
+
+Quicksort Median of Three Sort Time On 10000 Elements: 0.0012850000 seconds.
+
+Quicksort Median of Three Sort Time On 10000 Elements: 0.0012730000 seconds.
+
+Quicksort Median of Three Sort Time On 10000 Elements: 0.0012810000 seconds.
+
+Quicksort Median of Three Sort Time On 10000 Elements: 0.0012930000 seconds.
+
+Quicksort Median of Three Sort Time On 10000 Elements: 0.0012900000 seconds.
+
+Avg (of 10) Median of Three Pivot Running Time For 10000 elements: 0.0012823000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 10000 Elements: 0.0032380000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 10000 Elements: 0.0030400001 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 10000 Elements: 0.0031580001 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 10000 Elements: 0.0030880000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 10000 Elements: 0.0028359999 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 10000 Elements: 0.0030199999 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 10000 Elements: 0.0031729999 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 10000 Elements: 0.0030660001 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 10000 Elements: 0.0030139999 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 10000 Elements: 0.0030610000 seconds.
+
+Avg (of 10) Median of Random 5 Pivot Running Time For 10000 elements: 0.0030694001 seconds.
+bash-3.2$ exit
+
+Script done on Fri Oct 23 09:55:58 2015

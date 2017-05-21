@@ -1,0 +1,304 @@
+Script started on Tue Oct 27 14:08:57 2015
+[?1034hbash-3.2$ cat heap*
+/*  Tim M. Lael
+  CS 3010 e01
+  Project 2
+  Part C - Heapsort
+*/
+#include <iostream>
+#include <ctime>
+#include <cmath>
+
+/* Array fill function */
+int fill(int *array, int size){
+  for(int i=0; i<size; i++){
+        array[i] = (rand()%1000000);
+  }
+  return *array;
+}
+
+/* Array zero function */
+int clear(int *array, int size){
+  for(int i=0; i<size; i++){
+        array[i] = 0;
+  }
+  return *array;
+}
+
+/* Array print function */
+int print (int *array, int n){
+  for(int row=0; row<n/10; row++){
+    for(int col=0; col<10; col++){
+        printf("%i \t", array[(row*10)+col]);
+      }
+      printf("\n");
+  }
+  return *array;
+}
+
+/* Sift elements down function */
+void sift_down(int a[], int size, int l){
+	int i,j, x;
+  i = l;
+  j = 2*i+1;
+  x = a[i];
+
+  while (j < size){
+    if ( j < size - 1)
+      if ( a[j] < a[j+1])
+        ++j;
+    	if (x >= a[j])
+        break;
+    	a[i] = a[j];
+    	i = j;
+    	j = 2*i + 1; // sift
+  }
+  a[i] = x;
+}
+
+/* Build heap function */
+void build_heap(int a[], int size){
+  int l = size / 2;
+
+  while (l){
+    --l;
+    sift_down(a, size, l);
+  }
+}
+
+/* Silent heapsort function */
+void heapsorts(int a[], int size){
+	clock_t b1,b2;
+	clock_t s1,s2;
+  int l = 0, r = size;
+
+	/* Heap build phase */
+	b1=clock();
+	build_heap(a, size);
+  b2=clock();
+	float build = (b2-b1);
+  float bsec = build / CLOCKS_PER_SEC;
+	printf("\nHeap build time: %.10f seconds.\n", bsec);
+
+  build = bsec = 0;
+
+  /*Heap sort phase */
+	s1=clock();
+  while ( r > 1){
+    int tmp = a[0];
+    --r;
+    a[0] = a[r];
+    a[r] = tmp;
+    sift_down(a, r, 0);
+  }
+	s2=clock();
+  float srt = (s2-s1);
+  float ssec = srt / CLOCKS_PER_SEC;
+	printf("\nActual sorting time: %.10f seconds.\n", ssec);
+  srt = ssec = 0;
+}
+
+/* Verbose heapsort function
+	used to display heap after building*/
+void heapsortv(int a[], int size){
+	clock_t b1,b2;
+	clock_t s1,s2;
+  int l = 0, r = size;
+
+/* Heap build phase */
+	b1=clock();
+	build_heap(a, size);
+  b2=clock();
+	float build = (b2-b1);
+  float bsec = build / CLOCKS_PER_SEC;
+/* Show built heap */
+  printf("\nHeap:\n");
+  print(a, size);
+	printf("\nHeap build time: %.10f seconds.\n", bsec);
+
+  build = bsec = 0;
+
+/* Heap sort phase */
+	s1=clock();
+  while ( r > 1){
+    int tmp = a[0];
+    --r;
+    a[0] = a[r];
+    a[r] = tmp;
+    sift_down(a, r, 0);
+  }
+	s2=clock();
+  float srt = (s2-s1);
+  float ssec = srt / CLOCKS_PER_SEC;
+	printf("\nActual sorting time: %.10f seconds.\n", ssec);
+  srt = ssec = 0;
+}
+
+/* Silent heapsort function with no array output
+  used to display sort times only in analysis */
+float heaps (int p){
+  clock_t t1,t2;
+  int a[p];
+  int n = sizeof(a)/sizeof(a[0]);
+
+  fill(a, n);
+  t1=clock();
+  heapsorts(a, n);
+  t2=clock();
+  float diff = (t2-t1);
+  float seconds = diff / CLOCKS_PER_SEC;
+
+  printf("\nHeapsort actual build/sort/aggregate time: %.10f seconds.\n", seconds);
+  return seconds;
+}
+
+/* Verbose heapsort function with arrays displayed
+  used to display sort times and arrays */
+float heapv (int k){
+  clock_t t1,t2;
+  int a[k];
+  int n = sizeof(a)/sizeof(a[0]);
+
+  clear(a, n);
+  fill(a, n);
+  printf("Original array:\n");
+  print(a, n);
+  t1=clock();
+  heapsortv(a, n);
+  t2=clock();
+  float diff = (t2-t1);
+  float seconds = diff / CLOCKS_PER_SEC;
+
+  printf("\nHeapsorted array:\n");
+  print(a, n);
+  printf("\nHeapsort actual build/sort/aggregate time: %.10f seconds.\n", seconds);
+  return seconds;
+}
+
+void script(int s){
+  int w = pow(10,3);              //used to initialize 10^3 element arrays
+  float rt = 0;                   //sort running time
+  float art = 0;                  //sort average running time
+
+  printf("\nStatistics and arrays displayed for array of size N = 50:\n");
+  rt += heapv(s);
+  art = rt/1;
+  printf("\nTotal heapsort running time For %i elements: %.10f seconds.\n", s, art);
+
+  rt = 0;
+  art = 0;
+  printf("\nStatistics for array of size N = 10^3:");
+  heaps(w);
+}
+
+void analysis(){
+  int w = pow(10,3);              //used to initialize 10^3 element arrays
+  int x = pow(10,4);              //used to initialize 10^4 element arrays
+  int y = pow(10,5);              //used to initialize 10^5 element arrays
+  int z = pow(10,6);              //used to initialize 10^6 element arrays
+  float rt = 0;                   //sort running time
+  float art = 0;                  //sort average running time
+
+/* Below used for gathering required comparison statistics */
+  for (int i=0; i<10; i++){
+    printf("\nArray %i:\n", i+1);
+    rt += heaps(w);
+  }
+  art = rt/10;
+  printf("\nTotal avg. (of 10) heapsort running time For %i elements: %.10f seconds.\n", w, art);
+
+  rt = 0;
+  art = 0;
+
+  for (int i=0; i<10; i++){
+    printf("\nArray %i:\n", i+1);
+    rt += heaps(x);
+  }
+  art = rt/10;
+  printf("\nTotal avg. (of 10) heapsort running time For %i elements: %.10f seconds.\n", x, art);
+
+  rt = 0;
+  art = 0;
+
+  for (int i=0; i<10; i++){
+    printf("\nArray %i:\n", i+1);
+    rt += heaps(y);
+  }
+  art = rt/10;
+  printf("\nTotal avg. (of 10) heapsort running time For %i elements: %.10f seconds.\n", y, art);
+
+  rt = 0;
+  art = 0;
+
+  for (int i=0; i<10; i++){
+    printf("\nArray %i:\n", i+1);
+    rt += heaps(z);
+  }
+  art = rt/10;
+  printf("\nTotal avg. (of 10) heapsort running time For %i elements: %.10f seconds.\n", z, art);
+
+  rt = 0;
+  art = 0;
+}
+
+int main(int argc, char* argv[]){
+  srand(time(NULL));
+  int s = 50;                     //used to initialize 50 element arrays
+
+/* Uncomment lines between here and end script to run script */
+
+  script(s);
+
+/* End script */
+
+/* Uncomment lines between here and end analysis to run analysis */
+
+  //analysis();
+
+/* End Analysis */
+
+
+  return 0;
+}
+bash-3.2$ g++ heap*
+bash-3.2$ ./a.out
+
+Statistics and arrays displayed for array of size N = 50:
+Original array:
+241788 	197305 	506674 	97220 	226780 	187384 	865262 	893241 	74015 	60479
+392494 	642432 	31135 	305650 	697713 	351803 	983972 	536451 	829474 	258845
+622763 	727485 	937743 	422739 	376828 	741761 	571700 	315523 	607700 	296854
+232767 	435971 	547478 	799997 	263615 	563742 	345843 	547462 	614016 	933159
+322044 	66486 	719945 	918078 	764856 	671104 	635714 	270884 	23068 	898957
+
+Heap:
+983972 	937743 	898957 	893241 	933159 	741761 	865262 	799997 	829474 	719945
+918078 	642432 	571700 	607700 	697713 	547478 	263615 	563742 	614016 	322044
+622763 	764856 	671104 	422739 	376828 	31135 	506674 	315523 	305650 	296854
+232767 	435971 	351803 	97220 	197305 	536451 	345843 	547462 	74015 	258845
+60479 	66486 	241788 	727485 	226780 	392494 	635714 	270884 	23068 	187384
+
+Heap build time: 0.0000030000 seconds.
+
+Actual sorting time: 0.0000050000 seconds.
+
+Heapsorted array:
+23068 	31135 	60479 	66486 	74015 	97220 	187384 	197305 	226780 	232767
+241788 	258845 	263615 	270884 	296854 	305650 	315523 	322044 	345843 	351803
+376828 	392494 	422739 	435971 	506674 	536451 	547462 	547478 	563742 	571700
+607700 	614016 	622763 	635714 	642432 	671104 	697713 	719945 	727485 	741761
+764856 	799997 	829474 	865262 	893241 	898957 	918078 	933159 	937743 	983972
+
+Heapsort actual build/sort/aggregate time: 0.0000620000 seconds.
+
+Total heapsort running time For 50 elements: 0.0000620000 seconds.
+
+Statistics for array of size N = 10^3:
+Heap build time: 0.0000260000 seconds.
+
+Actual sorting time: 0.0001420000 seconds.
+
+Heapsort actual build/sort/aggregate time: 0.0001790000 seconds.
+bash-3.2$ exit
+
+Script done on Tue Oct 27 14:09:25 2015

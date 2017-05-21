@@ -1,0 +1,24 @@
+Script started on Fri Oct 23 09:06:50 2015
+[?1034hbash-3.2$ g++ merge*.cpp
+bash-3.2$ ./ao[K.out
+
+Avg running time for N = 1000 and M = 25: 0.0002324000 seconds.
+
+Avg running time for N = 1000 and M = 50: 0.0002432000 seconds.
+
+Avg running time for N = 1000 and M = 100: 0.0002556000 seconds.
+
+Avg running time for N = 10000 and M = 25: 0.0029606000 seconds.
+
+Avg running time for N = 10000 and M = 50: 0.0029227000 seconds.
+
+Avg running time for N = 10000 and M = 100: 0.0030447000 seconds.
+
+Avg running time for N = 100000 and M = 25: 0.0371810980 seconds.
+
+Avg running time for N = 100000 and M = 50: 0.0370406993 seconds.
+
+Avg running time for N = 100000 and M = 100: 0.0379102007 seconds.
+bash-3.2$ exit
+
+Script done on Fri Oct 23 09:07:15 2015

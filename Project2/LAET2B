@@ -1,0 +1,537 @@
+Script started on Thu Oct 22 22:10:47 2015
+[?1034hbash-3.2$ cat quicksort.cpp
+/*
+  Tim M. Lael
+  CS 3010 e01
+  Project 2
+  Part B - Quicksort
+*/
+#include <iostream>
+#include <ctime>
+#include <cmath>
+
+
+/* Array fill function */
+int fill(int *array, int size){
+  for(int i=0; i<size; i++){
+        array[i] = (rand()%1000000);
+  }
+  return *array;
+}
+
+/* Array zero function */
+int clear(int *array, int size){
+  for(int i=0; i<size; i++){
+        array[i] = 0;
+  }
+  return *array;
+}
+
+/* Array print function */
+int print (int *array, int n){
+  for(int row=0; row<n/10; row++){
+    for(int col=0; col<10; col++){
+        printf("%i \t", array[(row*10)+col]);
+      }
+      printf("\n");
+  }
+  return *array;
+}
+
+/* Element swap function */
+void swap(int *x, int *y){
+  int temp = *x;
+  *x = *y;
+  *y = temp;
+  return;
+}
+
+/* Determine and position right pivot */
+int rpivot(int a[], int left, int right){
+  int element = a[right];
+  int i = left - 1;
+
+  for(int j = left; j<right; ++j){
+    if(a[j] <=  element){
+      ++i;
+      swap(&a[i],&a[j]);
+    }
+  }
+  int temp = a[i+1];
+  a[i+1] = a[right];
+  a[right] = temp;
+  return a[i+1];
+}
+
+/* Determine and position median of three pivot */
+int median3(int a[], int left, int right){
+  int center = (left + right)/2;
+
+  if (a[center] < a[left])
+    swap(&a[left],&a[center]);
+
+  if (a[right] < a[left])
+    swap(&a[left],&a[right]);
+
+  if (a[right]< a[center])
+    swap(&a[center],&a[right]);
+    swap(&a[center], &a[right - 1]);
+
+  return a[right - 1];
+}
+
+/* Determine and position pivot from 5 random elements */
+int ran5(int a[], int left, int right){
+  int index;
+  int r1 = left + rand() % (right - left +1);
+  int r2 = left + rand() % (right - left +1);
+  int r3 = left + rand() % (right - left +1);
+  int r4 = left + rand() % (right - left +1);
+  int r5 = left + rand() % (right - left +1);
+
+  if (r1 > r2)
+  	swap(&r1, &r2);
+
+  if (r3 > r4)
+	  swap(&r3, &r4);
+
+  if (r3 < r1){
+  	swap(&r2, &r4);
+	   r3 = r1;
+  }
+  r1 = r5;
+
+  if (r1 > r2)
+  	swap(&r1, &r2);
+
+  if (r1 < r3){
+  	swap(&r2, &r4);
+	   r1 = r3;
+  }
+  if (r4 > r1)
+  	index = r1;
+
+  else
+  	index = r4;
+    int pivot = a[index];
+    swap(&a[index], &a[right]);
+    index = right;
+    int i = left -1;
+
+  for(int j = left; j <= right - 1; j++){
+  	if (a[j] <= pivot){
+		    i++;
+		    swap(&a[i], &a[j]);
+	  }
+  }
+  swap(&a[i+1], &a[index]);
+  return a[i+1];
+}
+
+/* Quicksort using right pivot */
+void qrp(int a[], int left, int right){
+  if (left < right) {
+    int pivot = rpivot(a,left,right);
+
+    if (left == right - 1) return;
+    int i = left;
+    int j = right - 1;
+
+    for ( ; ;) {
+      while(a[++i]<pivot) {}
+      while(pivot<a[--j]) {}
+
+      if ( i < j)
+        swap(&a[i],&a[j]);
+
+      else
+        break;
+    }
+  swap(&a[i],& a[right -1]);
+  qrp(a,left,i-1);
+  qrp(a,i+1,right);
+  }
+  return;
+}
+
+/* Quicksort using median of three pivot */
+void qm3(int a[], int left, int right){
+  if (left < right) {
+    int pivot = median3(a,left,right);
+
+    if (left == right - 1) return;
+
+    int i = left;
+    int j = right - 1;
+
+    for ( ; ;) {
+      while(a[++i]<pivot) {}
+      while(pivot<a[--j]) {}
+
+      if ( i < j)
+        swap(&a[i],&a[j]);
+
+      else
+        break;
+    }
+  swap(&a[i],& a[right -1]);
+  qm3(a,left,i-1);
+  qm3(a,i+1,right);
+  }
+  return;
+}
+
+/* Quicksort using medion of 5 random elements pivot */
+void q5r(int a[], int left, int right){
+  if (left < right) {
+    int pivot = ran5(a,left,right);
+
+    if (left == right - 1) return;
+
+    int i = left;
+    int j = right - 1;
+
+    for ( ; ;) {
+      while(a[++i]<pivot) {}
+      while(pivot<a[--j]) {}
+
+      if ( i < j)
+        swap(&a[i],&a[j]);
+      else
+        break;
+      }
+  swap(&a[i],& a[right -1]);
+  q5r(a,left,i-1);
+  q5r(a,i+1,right);
+  }
+  return;
+}
+
+/* Verbose quicksort right pivot function
+    used in main loop calls */
+float qrpl (int x){
+  clock_t t1,t2;
+  int a[x];
+  int n = sizeof(a)/sizeof(a[0]);
+
+  clear(a, n);
+  fill(a, n);
+  printf("Original array:\n");
+  print(a, n);
+  t1=clock();
+  qrp(a,0,n-1);
+  t2=clock();
+  float diff = (t2-t1);
+  float seconds = diff / CLOCKS_PER_SEC;
+
+  printf("\nQuick Sorted array:\n");
+  print(a, n);
+  printf("\nQuicksort Right Pivot Sort Time On %i Elements: %.10f seconds.\n", x, seconds);
+  return seconds;
+}
+
+/* Verbose quicksort median of three pivot function
+    used in main loop calls */
+float qm3l (int x){
+  clock_t t1,t2;
+  int a[x];
+  int n = sizeof(a)/sizeof(a[0]);
+
+  clear(a, n);
+  fill(a, n);
+  printf("Original array:\n");
+  print(a, n);
+  t1=clock();
+  qm3(a,0,n-1);
+  t2=clock();
+  float diff = (t2-t1);
+  float seconds = diff / CLOCKS_PER_SEC;
+
+  printf("\nQuick Sorted array:\n");
+  print(a, n);
+  printf("\nQuicksort Median of Three Sort Time On %i Elements: %.10f seconds.\n", x, seconds);
+  return seconds;
+}
+
+/* Verbose quicksort median of 5 random pivot function
+    used in main loop calls */
+float q5rl (int x){
+  clock_t t1,t2;
+  int a[x];
+  int n = sizeof(a)/sizeof(a[0]);
+
+  clear(a, n);
+  fill(a, n);
+  printf("Original array:\n");
+  print(a, n);
+  t1=clock();
+  q5r(a,0,n-1);
+  t2=clock();
+  float diff = (t2-t1);
+  float seconds = diff / CLOCKS_PER_SEC;
+
+  printf("\nQuick Sorted array:\n");
+  print(a, n);
+  printf("\nQuicksort Median of Five Random Pivot Sort Time On %i Elements: %.10f seconds.\n", x, seconds);
+  return seconds;
+}
+
+/* Silent quicksort right pivot function
+  used to display sort time in main */
+float qrps (int y){
+  clock_t t1,t2;
+  int a[y];
+  int n = sizeof(a)/sizeof(a[0]);
+
+  fill(a, n);
+  t1=clock();
+  qrp(a,0,n-1);
+  t2=clock();
+  float diff = (t2-t1);
+  float seconds = diff / CLOCKS_PER_SEC;
+
+  printf("\nQuicksort Right Pivot Sort Time On %i Elements: %.10f seconds.\n", y, seconds);
+  return seconds;
+}
+
+/* Silent quicksort median of three pivot function
+  used to display sort time in main */
+float qm3s (int y){
+  clock_t t1,t2;
+  int a[y];
+  int n = sizeof(a)/sizeof(a[0]);
+
+  clear(a, n);
+  fill(a, n);
+  t1=clock();
+  qm3(a,0,n-1);
+  t2=clock();
+  float diff = (t2-t1);
+  float seconds = diff / CLOCKS_PER_SEC;
+
+  printf("\nQuicksort Median of Three Sort Time On %i Elements: %.10f seconds.\n", y, seconds);
+  return seconds;
+}
+
+/* Silent quicksort median of 5 random pivot function
+  used to display sort time in main */
+float q5rs (int y){
+  clock_t t1,t2;
+  int a[y];
+  int n = sizeof(a)/sizeof(a[0]);
+
+  clear(a, n);
+  fill(a, n);
+  t1=clock();
+  q5r(a,0,n-1);
+  t2=clock();
+  float diff = (t2-t1);
+  float seconds = diff / CLOCKS_PER_SEC;
+
+  printf("\nQuicksort Median of Five Random Pivot Sort Time On %i Elements: %.10f seconds.\n", y, seconds);
+  return seconds;
+}
+
+void script (int s, int y){
+  float rt = 0;                   //sort running time
+  float art = 0;                  //sort average running time
+
+  /* Running times for each algorithm using 50 element arrays
+      and verbose functions */
+    printf("\nExample of each algorithm working on %i random element arrays.\n", s);
+
+
+    printf("\nQuicksort Right Pivot sort on %i elements.\n", s);
+    rt += qrpl(s);
+    art = rt/10;
+
+    rt = 0;
+    art = 0;
+
+    printf("\nQuicksort Median of Three Pivot sort on %i elements.\n", s);
+    rt += qm3l(s);
+    art = rt/10;
+
+    rt = 0;
+    art = 0;
+
+    printf("\nQuicksort Median of Five Random Pivot sort on %i elements.\n", s);
+    rt += q5rl(s);
+    art = rt/10;
+
+    rt = 0;
+    art = 0;
+
+  /* Sort times for each algorithm using 10^3 element arrays
+      and silent functions */
+    printf("\nSort Times For %i Elements:", y);
+    qrps(y);
+    qm3s(y);
+    q5rs(y);
+}
+
+void analysis(){
+  int x = pow(10,2);              //used to initialize 10^2 element arrays
+  int y = pow(10,3);              //used to initialize 10^3 element arrays
+  int z = pow(10,4);              //used to initialize 10^4 element arrays
+  float rt = 0;                   //sort running time
+  float art = 0;                  //sort average running time
+
+/* Below used for gathering required comparison statistics */
+  for (int i=0; i<10; i++){
+    rt += qrpl(x);
+  }
+  art = rt/10;
+  printf("\nAvg (of 10) Right Pivot Running Time For %i elements: %.10f seconds.\n", x, art);
+  rt = 0;
+  art = 0;
+
+  for (int i=0; i<10; i++){
+    rt += qm3l(x);
+  }
+  art = rt/10;
+  printf("\nAvg (of 10) Median of Three Pivot Running Time For %i elements: %.10f seconds.\n", x, art);
+  rt = 0;
+  art = 0;
+
+  for (int i=0; i<10; i++){
+    rt += q5rl(x);
+  }
+  art = rt/10;
+  printf("\nAvg (of 10) Median of Random 5 Pivot Running Time For %i elements: %.10f seconds.\n", x, art);
+  rt = 0;
+  art = 0;
+
+  for (int i=0; i<10; i++){
+    rt += qrpl(y);
+  }
+  art = rt/10;
+  printf("\nAvg (of 10) Right Pivot Running Time For %i elements: %.10f seconds.\n", y, art);
+  rt = 0;
+  art = 0;
+
+  for (int i=0; i<10; i++){
+    rt += qm3l(y);
+  }
+  art = rt/10;
+  printf("\nAvg (of 10) Median of Three Pivot Running Time For %i elements: %.10f seconds.\n", y, art);
+  rt = 0;
+  art = 0;
+
+  for (int i=0; i<10; i++){
+    rt += q5rl(y);
+  }
+  art = rt/10;
+  printf("\nAvg (of 10) Median of Random 5 Pivot Running Time For %i elements: %.10f seconds.\n", y, art);
+  rt = 0;
+  art = 0;
+
+  for (int i=0; i<10; i++){
+    rt += qrpl(z);
+  }
+  art = rt/10;
+  printf("\nAvg (of 10) Right Pivot Running Time For %i elements: %.10f seconds.\n", z, art);
+  rt = 0;
+  art = 0;
+
+  for (int i=0; i<10; i++){
+    rt += qm3l(z);
+  }
+  art = rt/10;
+  printf("\nAvg (of 10) Median of Three Pivot Running Time For %i elements: %.10f seconds.\n", z, art);
+  rt = 0;
+  art = 0;
+
+  for (int i=0; i<10; i++){
+    rt += q5rl(z);
+  }
+  art = rt/10;
+  printf("\nAvg (of 10) Median of Random 5 Pivot Running Time For %i elements: %.10f seconds.\n", z, art);
+  rt = 0;
+  art = 0;
+
+}
+
+int main(int argc, char* argv[]){
+  srand(time(NULL));
+  int y = pow(10,3);              //used to initialize 10^3 element arrays
+  int s = 50;                     //used to initialize 50 element arrays
+
+/* Uncomment lines between here and end script to run script */
+
+  script(s, y);
+
+/* End script */
+
+/* Uncomment lines between here and end analysis to run analysis */
+
+  //analysis();
+
+/* End analysis */
+  return 0;
+}
+bash-3.2$ g++ quicksort.coo[K[Kpp
+bash-3.2$ ./a.out
+
+Example of each algorithm working on 50 random element arrays.
+
+Quicksort Right Pivot sort on 50 elements.
+Original array:
+306579 	568869 	133821 	676743 	944998 	249746 	679767 	198000 	709211 	288294 	
+994744 	88471 	546891 	930093 	732074 	188177 	663921 	939128 	44336 	953212 	
+86795 	670850 	183647 	121176 	889633 	877202 	38405 	106657 	275928 	351038 	
+355882 	752533 	938507 	189600 	709982 	713681 	242686 	257701 	484482 	775892 	
+163347 	393057 	548563 	1408 	487163 	675416 	509661 	932874 	953563 	813424 	
+
+Quick Sorted array:
+306579 	487163 	133821 	249746 	198000 	288294 	88471 	188177 	44336 	86795 	
+183647 	121176 	38405 	106657 	275928 	351038 	355882 	189600 	242686 	257701 	
+484482 	163347 	393057 	1408 	675416 	509661 	568869 	546891 	548563 	663921 	
+709982 	676743 	732074 	679767 	713681 	709211 	670850 	752533 	775892 	953563 	
+813424 	877202 	938507 	889633 	932874 	930093 	939128 	944998 	953212 	994744 	
+
+Quicksort Right Pivot Sort Time On 50 Elements: 0.0000140000 seconds.
+
+Quicksort Median of Three Pivot sort on 50 elements.
+Original array:
+795738 	189795 	803581 	924165 	235197 	998876 	232990 	613513 	67561 	902961 	
+440449 	585955 	560048 	444551 	918347 	778746 	102430 	461827 	461739 	757383 	
+847677 	549312 	868456 	125190 	149013 	822350 	686767 	445961 	468166 	612588 	
+581741 	228157 	686340 	579590 	929019 	936238 	219525 	281464 	204558 	711567 	
+435530 	399987 	194648 	597987 	588592 	949329 	682305 	682215 	404762 	336100 	
+
+Quick Sorted array:
+67561 	102430 	125190 	149013 	189795 	194648 	204558 	219525 	228157 	232990 	
+235197 	281464 	336100 	399987 	404762 	435530 	440449 	444551 	445961 	461739 	
+461827 	468166 	549312 	560048 	579590 	581741 	585955 	588592 	597987 	612588 	
+613513 	682215 	682305 	686340 	686767 	711567 	757383 	778746 	795738 	803581 	
+822350 	847677 	868456 	902961 	918347 	924165 	929019 	936238 	949329 	998876 	
+
+Quicksort Median of Three Sort Time On 50 Elements: 0.0000070000 seconds.
+
+Quicksort Median of Five Random Pivot sort on 50 elements.
+Original array:
+667484 	696287 	865920 	842075 	791541 	603870 	189316 	127773 	932991 	100000 	
+862167 	6400 	63603 	759795 	853174 	393089 	193488 	496317 	351995 	317247 	
+17 	608199 	939376 	966834 	513918 	557208 	672491 	955090 	168495 	322798 	
+886068 	201867 	482036 	216861 	371473 	988215 	708037 	901632 	742140 	478558 	
+858078 	255159 	539713 	228792 	31933 	771348 	441764 	814466 	89058 	732509 	
+
+Quick Sorted array:
+17 	89058 	31933 	63603 	100000 	127773 	6400 	228792 	189316 	193488 	
+255159 	201867 	317247 	216861 	322798 	168495 	441764 	351995 	371473 	482036 	
+478558 	496317 	393089 	603870 	513918 	539713 	557208 	814466 	608199 	667484 	
+742140 	672491 	696287 	708037 	732509 	791541 	759795 	771348 	842075 	853174 	
+886068 	858078 	862167 	865920 	901632 	988215 	932991 	939376 	955090 	966834 	
+
+Quicksort Median of Five Random Pivot Sort Time On 50 Elements: 0.0000140000 seconds.
+
+Sort Times For 1000 Elements:
+Quicksort Right Pivot Sort Time On 1000 Elements: 0.0003030000 seconds.
+
+Quicksort Median of Three Sort Time On 1000 Elements: 0.0001410000 seconds.
+
+Quicksort Median of Five Random Pivot Sort Time On 1000 Elements: 0.0003180000 seconds.
+bash-3.2$ exit
+
+Script done on Thu Oct 22 22:11:12 2015

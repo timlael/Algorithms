@@ -1,0 +1,32 @@
+Script started on Sat Nov 28 19:05:28 2015
+[?1034hbash-3.2$ ./a.out
+14	16	17	18	18	
+Average Tree height for 5 trees with 100 elements is: 16
+
+19	19	20	21	21	22	22	22	22	22	
+Average Tree height for 10 trees with 100 elements is: 21
+
+22	23	23	23	23	23	23	23	23	24	24	24	24	25	25	
+Average Tree height for 15 trees with 100 elements is: 23
+
+25	26	26	26	26	
+Average Tree height for 5 trees with 500 elements is: 25
+
+26	26	26	26	26	26	26	26	26	26	
+Average Tree height for 10 trees with 500 elements is: 26
+
+26	26	26	26	26	27	27	27	27	27	27	27	27	27	27	
+Average Tree height for 15 trees with 500 elements is: 26
+
+27	27	27	27	27	
+Average Tree height for 5 trees with 1000 elements is: 27
+
+27	27	27	27	27	27	27	27	27	27	
+Average Tree height for 10 trees with 1000 elements is: 27
+
+27	27	27	28	28	28	28	28	28	28	28	28	28	28	28	
+Average Tree height for 15 trees with 1000 elements is: 27
+
+bash-3.2$ exit
+
+Script done on Sat Nov 28 19:05:50 2015

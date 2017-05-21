@@ -1,0 +1,21 @@
+Approach 1
+N[large] - sorted
+M[small]
+
+Append and merge sort
+
+Approach 2
+N[large] - sorted
+M[small]
+
+Sort small then merge
+
+
+Analysis:
+N = 1000, 10000, 100000
+M = 25, 50, 100
+Run 10 times for each combination and average
+
+Script: 
+Show merge sort for 100 elements
+Show how smaller file is sorted and merged with larger file
